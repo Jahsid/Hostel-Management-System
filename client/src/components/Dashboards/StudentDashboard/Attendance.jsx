@@ -51,7 +51,7 @@ function Attendance() {
   }, [ daysOff.length, thisWeek.length ]);
   return (
     <div className="w-full h-screen flex flex-col gap-5 items-center justify-center max-h-screen overflow-y-auto pt-20 md:pt-0 ">
-      <h1 className="text-white font-bold text-5xl">Attendance</h1>
+      <h1 className="text-white font-bold text-5xl pt-10">Attendance</h1>
       <ul className="flex gap-5 text-white text-xl px-5 sm:p-0 text-center">
         <li>Total Days: {totalDays}</li>
         <li>Present Days: {daysPresent}</li>

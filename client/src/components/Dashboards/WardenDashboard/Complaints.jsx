@@ -230,6 +230,12 @@ function Complaints() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium truncate text-white">
+                        Student: {complaint.student}
+                      </p>
+                      <p className="text-sm font-medium truncate text-white">
+                        Room: {complaint.room}
+                      </p>
+                      <p className="text-sm font-medium truncate text-white">
                         {complaint.title}
                       </p>
                       <p className="text-sm truncate text-gray-400">
