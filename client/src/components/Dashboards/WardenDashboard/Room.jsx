@@ -113,7 +113,7 @@ const WardenRoomDetails = () => {
               onChange={handleInputChange}
               className="border px-2 py-1 rounded-md"
             />
-            <label className="flex items-center">
+            {/* <label className="flex items-center">
               <input
                 type="checkbox"
                 name="occupancy"
@@ -122,7 +122,7 @@ const WardenRoomDetails = () => {
                 className="mr-2"
               />
               Occupied
-            </label>
+            </label> */}
             <button
               onClick={handleCreateRoom}
               className="bg-green-500 text-white px-3 py-1 rounded-md"

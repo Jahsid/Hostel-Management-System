@@ -33,6 +33,11 @@ const registerStudent = async (req, res) => {
         });
 
         await user.save();
+        //find room based upon room no
+        //find capacity and count
+        //check available in room
+        //if availble update count else show err message
+        //if difference between capacity and count is 1 then show occupied true
         
         student = new Student({
             name,

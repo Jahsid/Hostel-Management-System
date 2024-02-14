@@ -65,7 +65,7 @@ function Attendance() {
             datasets: [
               {
                 label: "days",
-                data: [daysOff, totalDays - daysOff],
+                data: [daysOff, daysPresent],
                 backgroundColor: ["#F26916", "#1D4ED8"],
                 barThickness: 40,
                 borderRadius: 5,

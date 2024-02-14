@@ -8,7 +8,7 @@ const { registerStudent, getStudent, getAllStudents, updateStudent, deleteStuden
 // @desc   Register student
 // @access Public
 router.post('/register-student', [
-    check('name', 'Name is required').not().isAlpha().isEmpty(),
+    check('name', 'Name is required').isAlpha().not().isEmpty(),
     check('admission_no', 'admission number of at least 6 digit is required').isLength(6),
     check('room_no', 'Room number is required'),
     check('batch', 'Batch is required').not().isEmpty(),

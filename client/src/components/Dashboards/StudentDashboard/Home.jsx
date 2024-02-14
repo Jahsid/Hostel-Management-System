@@ -131,12 +131,17 @@ function Home() {
     const data = await res.json();
     if (data.success) {
       let daysOff = 0;
+      let daysPresent = 0;
       data.attendance.map((day) => {
         if (day.status === "absent") {
           daysOff++;
         }
+        if(day.status === "present"){
+          daysPresent++;
+        }
       });
       setDaysOff(daysOff);
+      setDaysPresent(daysPresent);
       console.log(daysOff);
     } else {
       console.log("Error");
@@ -151,6 +156,7 @@ function Home() {
   let totalDays = new Date();
   totalDays = totalDays.getDate();
   const [daysOff, setDaysOff] = useState(0); //!Fetch from database
+  const [daysPresent, setDaysPresent] = useState(0); //!Fetch from database
 
   return (
     <div className="w-full h-screen flex items-center justify-center flex-col gap-5 max-h-screen overflow-y-auto pt-64 lg:pt-0 md:pt-64 sm:pt-96">
@@ -168,7 +174,7 @@ function Home() {
               datasets: [
                 {
                   label: "days",
-                  data: [daysOff, totalDays - daysOff],
+                  data: [daysOff, daysPresent],
                   backgroundColor: ["#F26916", "#1D4ED8"],
                   barThickness: 50,
                   borderColor: "rgba(0,0,0,0)",
