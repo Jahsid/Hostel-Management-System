@@ -1,6 +1,7 @@
 const {verifyToken } = require('../utils/auth');
 const { validationResult } = require('express-validator');
 const { Student, Hostel, User } = require('../models');
+const Room = require('../models/Room'); // Assuming your Room model is defined in a separate file
 const bcrypt = require('bcryptjs');
 const Parser = require('json2csv').Parser;
 
@@ -14,6 +15,7 @@ const registerStudent = async (req, res) => {
     }
 
     const { name, admission_no, room_no, batch, dept, course, email, father_name, contact, address, dob, aadhar_card, hostel, password } = req.body;
+    console.log("Hello",room_no);
     try {
         let student = await Student.findOne({ admission_no });
 
@@ -58,6 +60,12 @@ const registerStudent = async (req, res) => {
         
 
         await student.save();
+        const roomCount = await Student.countDocuments({room_no : student.room_no});
+        console.log(roomCount);
+        const room = await Room.findOne({roomNumber :student.room_no})
+        if(roomCount >= room.capacity){
+            await Room.findByIdAndUpdate(room.id, {occupancy: true}, { new: true });
+        }
 
         success = true;
         res.json({success, student });

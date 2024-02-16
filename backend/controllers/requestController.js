@@ -8,6 +8,7 @@ const register = async (req, res) => {
     }
     try {
         const { admission_no } = req.body;
+        console.log("Hello",admission_no);
         const request = await Request.findOne({ admission_no });
         if(request) {
             return res.status(400).json({ errors: [{ msg: 'Request already exists' }] });

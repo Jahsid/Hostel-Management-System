@@ -14,7 +14,7 @@ function AdminRegisterStudent() {
       let student = {
         name: name,
         admission_no: admission,
-        roomId: selectedRoom,
+        room_no: selectedRoom,
         batch: batch,
         dept: dept,
         course: course,
@@ -37,6 +37,7 @@ function AdminRegisterStudent() {
           body: JSON.stringify(student),
         }
       );
+      console.log(student);
       const data = await res.json();
 
       if (data.success) {
@@ -53,19 +54,19 @@ function AdminRegisterStudent() {
             theme: "dark",
           }
         );
-        setAdmission("");
-        setName("");
-        setRoomNo("");
-        setBatch("");
-        setDept("");
-        setCourse("");
-        setEmail("");
-        setFatherName("");
-        setContact("");
-        setAddress("");
-        setDob("");
-        setAadhar_card("");
-        setPassword("");
+        // setAdmission("");
+        // setName("");
+        // setRoomNo("");
+        // setBatch("");
+        // setDept("");
+        // setCourse("");
+        // setEmail("");
+        // setFatherName("");
+        // setContact("");
+        // setAddress("");
+        // setDob("");
+        // setAadhar_card("");
+        // setPassword("");
         setLoading(false);
       } else {
         // console.log(admission);
@@ -118,7 +119,8 @@ function AdminRegisterStudent() {
   };
 
   const handleRoomNoChange = (e) => {
-    setRoomNo(e.target.value);
+    console.log(e.target);
+    setSelectedRoom(e.target.value);
   };
 
   // Add these states at the beginning of your component
@@ -128,9 +130,10 @@ function AdminRegisterStudent() {
   useEffect(() => {
     const fetchAvailableRooms = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/room/getAll"); // Adjust the endpoint
+        const response = await fetch("http://localhost:3000/api/room/getAvailableRoom"); // Adjust the endpoint
         const data = await response.json();
           setAvailableRooms(data);
+          setSelectedRoom(data[0].roomNumber)
       } catch (error) {
         console.error("Error fetching available rooms:", error);
       }
@@ -274,13 +277,13 @@ function AdminRegisterStudent() {
                 name="room"
                 className="bg-neutral-700 border-neutral-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 p-2.5 rounded-lg"
                 value={selectedRoom}
-                onChange={(e) => setSelectedRoom(e.target.value)}
+                onChange={(e) => handleRoomNoChange(e)}
               >
                 <option disabled>
                   -- Select Room --
                 </option>
                 {availableRooms.map((room) => (
-                  <option key={room._id} value={room._id}>
+                  <option key={room.roomNumber} value={room.roomNumber}>
                     {room.roomNumber}
                   </option>
                 ))}

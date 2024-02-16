@@ -1,6 +1,7 @@
 // Import necessary modules
 const Room = require('../models/Room'); // Assuming your Room model is defined in a separate file
-const Hostel = require('../models/Hostel')
+const Hostel = require('../models/Hostel');
+const { Student } = require('../models');
 
 // Create a new room
 exports.createRoom = async (req, res) => {
@@ -83,6 +84,28 @@ exports.getHostel = async (req, res) => {
     }
 
     res.json(hostel);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+exports.getAvailableRoom = async (req, res) => {
+  try {
+    const rooms = await Room.find({ occupancy: false});
+    
+
+    res.json(rooms);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+exports.getRoomates = async (req, res) => {
+  try{
+  const roomdetails = await Student.find({room_no : req.params.room_no});
+  res.json(roomdetails);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
