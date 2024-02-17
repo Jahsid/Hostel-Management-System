@@ -37,7 +37,7 @@ function Sidebar({ links }) {
   }, []);
 
   return (
-    <div>
+    <div className="h-screen fixed">
       <button
         className={`fixed flex gap-2 md:hidden z-50 top-[6rem] left-20 md:left-20 ml-10 bg-black p-1 w-50 h-50 rounded-full shadow-lg text-white transition-transform duration-300 ease-in-out transform ${
           isOpen ? "translate-x-20" : "-translate-x-20"

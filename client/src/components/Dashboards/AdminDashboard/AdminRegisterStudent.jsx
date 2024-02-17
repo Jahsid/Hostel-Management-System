@@ -54,19 +54,19 @@ function AdminRegisterStudent() {
             theme: "dark",
           }
         );
-        // setAdmission("");
-        // setName("");
-        // setRoomNo("");
-        // setBatch("");
-        // setDept("");
-        // setCourse("");
-        // setEmail("");
-        // setFatherName("");
-        // setContact("");
-        // setAddress("");
-        // setDob("");
-        // setAadhar_card("");
-        // setPassword("");
+        setAdmission("");
+        setName("");
+        setRoomNo("");
+        setBatch("");
+        setDept("");
+        setCourse("");
+        setEmail("");
+        setFatherName("");
+        setContact("");
+        setAddress("");
+        setDob("");
+        setAadhar_card("");
+        setPassword("");
         setLoading(false);
       } else {
         // console.log(admission);

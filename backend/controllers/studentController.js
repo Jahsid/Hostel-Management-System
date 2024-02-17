@@ -15,7 +15,6 @@ const registerStudent = async (req, res) => {
     }
 
     const { name, admission_no, room_no, batch, dept, course, email, father_name, contact, address, dob, aadhar_card, hostel, password } = req.body;
-    console.log("Hello",room_no);
     try {
         let student = await Student.findOne({ admission_no });
 
@@ -60,17 +59,26 @@ const registerStudent = async (req, res) => {
         
 
         await student.save();
+                
         const roomCount = await Student.countDocuments({room_no : student.room_no});
-        console.log(roomCount);
         const room = await Room.findOne({roomNumber :student.room_no})
+        const availableStudentsRooms = room?.students?room.students:[]
+        availableStudentsRooms.push({student_id:student.id,name:student.name})
         if(roomCount >= room.capacity){
-            await Room.findByIdAndUpdate(room.id, {occupancy: true}, { new: true });
+            //const res = await Room.findByIdAndUpdate(room.id, {occupancy: true,students:availableStudentsRooms}, { new: true });
+            const res = await Room.findByIdAndUpdate(room.id, { $set: { occupancy: true, students: availableStudentsRooms }}, { new: true });
+
+            console.log(res);
+        }else {
+            const res = await Room.findByIdAndUpdate(room.id, { $set: { occupancy: false, students: availableStudentsRooms }}, { new: true });
+
+            console.log(res);
         }
 
         success = true;
         res.json({success, student });
     } catch (err) {
-        console.log(err);
+        console.log("error",err);
         res.status(500).json({success, errors: 'Server error'});
     }
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const WardenRoomDetails = () => {
   const [rooms, setRooms] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState(false);
   const [newRoom, setNewRoom] = useState({
     roomNumber: '',
     capacity: '',
@@ -62,6 +63,14 @@ const WardenRoomDetails = () => {
     }
   };
 
+  const handleDetails = (roomId) => {
+    if(selectedRoom === roomId) {
+      setSelectedRoom(false);
+    } else {
+      setSelectedRoom(roomId);
+    }
+  }
+
   return (
     <div className="w-full h-full flex flex-col gap-3 items-center justify-start max-h-full overflow-x-hidden overflow-y-auto pt-[400px] sm:pt-96 md:pt-96 lg:pt-80 xl:pt-20">
       <h1 className="text-white font-bold text-5xl">Room Details</h1>
@@ -77,19 +86,34 @@ const WardenRoomDetails = () => {
         {/* Render a list of rooms */}
         <ul className="mt-3">
           {rooms.map((room) => (
+            <div className="w-full d-flex flex-col gap-2 bg-blue-500 pt-5 mb-5 ">
             <li key={room._id} className="flex justify-between items-center bg-gray-800 p-3 rounded-lg mb-2">
               <span className="text-white">{room.roomNumber}</span>
               <span className="text-white">{room.capacity} Capacity</span>
-              <span className={`text-${room.occupancy ? 'red' : 'green'}-500`}> 
+              <span className="text-white"> 
                 {room.occupancy ? 'Occupied' : 'Available'}
               </span>
               <button
+                onClick={() => handleDetails(room._id)}
+                className="bg-green-500 font-bold text-white px-3 py-1 rounded-md"
+              >
+                Details
+              </button>
+              <button
                 onClick={() => handleDeleteRoom(room._id)}
-                className="bg-red-500 text-white px-3 py-1 rounded-md"
+                className="bg-red-500 font-bold text-white px-3 py-1 rounded-md"
               >
                 Delete
               </button>
             </li>
+            {selectedRoom==room._id && room.students.length > 0 ? room.students.map((student)=>{
+              return(
+                <div>
+                  <p>Student Name: {student.name}</p>
+                </div>
+              )
+            }): <p className="text-red-500 text-lg">Room is empty</p>}
+            </div>
           ))}
         </ul>
 
