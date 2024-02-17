@@ -80,13 +80,13 @@ const WardenRoomDetails = () => {
         <ShortCard title="Available Rooms" number={rooms.filter(room => !room.occupancy).length} />
         <ShortCard title="Occupied Rooms" number={rooms.filter(room => room.occupancy).length} />
       </div>
-      <div className="bg-neutral-950 px-10 py-5 rounded-xl shadow-xl sm:w-[80%] w-full mt-5 max-h-full">
+      <div className="bg-neutral-950 px-10 py-5 rounded-xl shadow-xl sm:w-[80%] w-full mt-5">
         <span className="text-white font-bold text-xl">All Rooms</span>
 
         {/* Render a list of rooms */}
-        <ul className="mt-3">
+        <ul className="mt-3 ">
           {rooms.map((room) => (
-            <div className="w-full d-flex flex-col gap-2 bg-blue-500 pt-5 mb-5 ">
+            <div className="w-full d-flex flex-col gap-2 pt-5 mb-5 ">
             <li key={room._id} className="flex justify-between items-center bg-gray-800 p-3 rounded-lg mb-2">
               <span className="text-white">{room.roomNumber}</span>
               <span className="text-white">{room.capacity} Capacity</span>
@@ -106,13 +106,13 @@ const WardenRoomDetails = () => {
                 Delete
               </button>
             </li>
-            {selectedRoom==room._id && room.students.length > 0 ? room.students.map((student)=>{
+            {selectedRoom==room._id ? room.students.length > 0 ? room.students.map((student)=>{
               return(
                 <div>
-                  <p>Student Name: {student.name}</p>
+                  <p className="text-green-500 text-lg">Student Name: {student.name}</p>
                 </div>
               )
-            }): <p className="text-red-500 text-lg">Room is empty</p>}
+            }):<p className="text-red-500 text-lg">Room is empty</p>: null}
             </div>
           ))}
         </ul>

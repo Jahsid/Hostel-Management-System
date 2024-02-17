@@ -13,7 +13,7 @@ function Invoices() {
       headers: {
         "Content-Type": "application/json",
         },
-        body: JSON.stringify({student: student._id}),
+        body: JSON.stringify({student: student?._id}),
       })
       .then((res) => res.json())
       .then((data) => {
@@ -24,9 +24,9 @@ function Invoices() {
           let pendingInvoices = 0;
     
           invoices.forEach((invoice) => {
-            if (invoice.status.toLowerCase === "paid") {
+            if (invoice.status.toLowerCase() === "approved") {
               paidInvoices += 1;
-            }else if(invoice.status.toLowerCase === "pending"){
+            }else if(invoice.status.toLowerCase() === "pending"){
               pendingInvoices += 1;        
             }
             
