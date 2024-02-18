@@ -161,15 +161,7 @@ export default function SignIn() {
             pauseOnHover
             theme="dark"
           />
-          <p className="text-sm font-light text-gray-400">
-            Don’t have an account yet?{" "}
-            <Link
-              to="/auth/request"
-              className="font-medium hover:underline text-blue-500"
-            >
-              Request an account.
-            </Link>
-          </p>
+          
         </form>
       </div>
     </div>

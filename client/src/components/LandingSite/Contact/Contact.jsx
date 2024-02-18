@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
 function Contact() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
@@ -12,7 +13,8 @@ function Contact() {
     e.preventDefault();
     setIsSending(true);
 
-    emailjs.send('service_8rczlf7', 'template_l0pjp5x', {
+    emailjs.send('service_8rczlf7', 'template_e5hcsgg', {
+      username,
       email,
       subject,
       message,
@@ -29,7 +31,9 @@ function Contact() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'email') {
+    if (name === 'username') {
+      setUsername(value);
+    } else if (name === 'email') {
       setEmail(value);
     } else if (name === 'subject') {
       setSubject(value);
@@ -45,6 +49,19 @@ function Contact() {
         <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">If you are facing any problem or if you have any querie, Let us know.</p>
         <form onSubmit={handleSubmit} className="space-y-8">
           <div>
+            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your name</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={handleInputChange}
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+              placeholder="name"
+              required
+            />
+          </div>
+          <div>
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
             <input
               type="email"
@@ -53,7 +70,7 @@ function Contact() {
               value={email}
               onChange={handleInputChange}
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-              placeholder="name@flowbite.com"
+              placeholder="user@gmail.com"
               required
             />
           </div>

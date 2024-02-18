@@ -327,7 +327,7 @@ useEffect (()=>{
       <div className="w-full flex gap-5 sm:px-20 h-80 flex-wrap items-center justify-center">
         <List list={messReqs} title="mess" icon={messIcon} />
         {graph}
-        <List list={suggestions} title="suggestions" icon={suggestionIcon} />
+        {/* <List list={suggestions} title="suggestions" icon={suggestionIcon} /> */}
       </div>
     </div>
   );

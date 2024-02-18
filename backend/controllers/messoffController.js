@@ -48,7 +48,7 @@ exports.countMessOff = async (req, res) => {
     try {
         let date = new Date();
         const list = await MessOff.find({ student, leaving_date: { $gte: new Date(date.getFullYear(), date.getMonth(), 1), $lte: new Date(date.getFullYear(), date.getMonth() + 1, 0) } });
-        let approved = await MessOff.find({student, status: "Approved", leaving_date: {$gte: new Date(date.getFullYear(), date.getMonth(), 1), $lte: new Date(date.getFullYear(), date.getMonth()+1, 0)}});
+        let approved = await MessOff.find({student, status: "approved", leaving_date: {$gte: new Date(date.getFullYear(), date.getMonth(), 1), $lte: new Date(date.getFullYear(), date.getMonth()+1, 0)}});
         
         let days = 0;
         for (let i = 0; i < approved.length; i++) {
