@@ -10,7 +10,7 @@ router.post('/register-warden', [
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check('father_name', 'Father name is required').not().isEmpty(),
-    check('contact', 'Enter a valid contact number').isLength(11),
+    check('contact', 'Enter a valid contact number').isLength(10),
     check('address', 'Address is required').not().isEmpty(),
     check('dob', 'Date of birth is required').not().isEmpty(),
     check('aadhar_card', 'AADHAR is required').isLength(12),
@@ -23,7 +23,7 @@ router.post('/register-warden', [
 router.post('/update-warden', [
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
-    check('contact', 'Enter a valid contact number').isLength(11),
+    check('contact', 'Enter a valid contact number').isLength(10),
     check('address', 'Address is required').not().isEmpty(),
     check('dob', 'Date of birth is required').not().isEmpty(),
     check('aadhar_card', 'AADHAR is required').isLength(12),
