@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
-const { login, changePassword, verifySession } = require('../controllers/authController');
+const { login, changePassword, verifySession, register } = require('../controllers/authController');
 
 // @route   POST api/auth/login
 // @desc    Authenticate user and get token
@@ -26,5 +26,13 @@ router.post('/change-password', [
 router.post('/verifysession', [
     check('token', 'Token is required').not().isEmpty()
 ], verifySession);
+
+// @route   POST api/auth/register
+// @desc    Create user
+// @access  Public
+router.post('/register', [
+    check('email', 'Please include a valid email').isEmail(),
+    check("password", "Password must be at least 8 characters").isLength({ min: 8 }),
+], register);
 
 module.exports = router;

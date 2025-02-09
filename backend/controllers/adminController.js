@@ -53,6 +53,7 @@ const registerAdmin = async (req, res) => {
             res.json({success, token, admin});
 
         } catch (error) {
+            console.error(error);
             res.status(500).send('Server error');
         }
     } catch (err) {

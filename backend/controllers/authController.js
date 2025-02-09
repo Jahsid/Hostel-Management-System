@@ -117,3 +117,39 @@ exports.verifySession = async (req, res, next) => {
         return res.status(500).json({success, "message": "Server Error"});
     }
 }
+
+
+exports.register = async (req, res) => {
+    let success = false;
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ success, errors: errors.array() });
+        }
+
+        const { email, password, isAdmin, isWarden } = req.body;
+
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ success, errors: [{ msg: "User already exists"}] });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user = new User({
+            email,
+            password: hashedPassword,
+            isAdmin: isAdmin || false,
+            isWarden: isWarden || false,
+        });
+
+        await user.save();
+        success = true;
+
+        res.status(201).json({ success, msg: "User registered successfully" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Server error");
+    }
+}
