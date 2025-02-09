@@ -1,3 +1,5 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
 const verifysession = async () => {
   try {
     const token = localStorage.getItem("token");
@@ -7,7 +9,7 @@ const verifysession = async () => {
       return;
     }
 
-    const response = await fetch("http://localhost:3000/api/auth/verifysession", {
+    const response = await fetch(`${API_URL}/api/auth/verifysession`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

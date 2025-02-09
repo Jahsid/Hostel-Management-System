@@ -11,6 +11,7 @@ import {
   Legend,
 } from "recharts";
 
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ function Home() {
   const getCount = async () => {
     try {
     // setLoading(true);
-      const res = await fetch("http://localhost:3000/api/student/studentCount", {
+      const res = await fetch(`${API_URL}/api/student/studentCount`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +69,7 @@ useEffect (()=>{
   const getRequests = async () => {
     const hostel = JSON.parse(localStorage.getItem("hostel"));
     console.log(hostel);
-    const res = await fetch("http://localhost:3000/api/messoff/list", {
+    const res = await fetch(`${API_URL}/api/messoff/list`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -218,7 +219,7 @@ useEffect (()=>{
   const getCountComplaints = async () => {
     try {
     // setLoading(true);
-      const res = await fetch("http://localhost:3000/api/complaint/complaintCount", {
+      const res = await fetch(`${API_URL}/api/complaint/complaintCount`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -268,7 +269,7 @@ const [suggestionCount, setSuggestionCount] = useState(0);
   const getCountSuggestions = async () => {
     try {
     // setLoading(true);
-      const res = await fetch("http://localhost:3000/api/suggestion/suggestionCount", {
+      const res = await fetch(`${API_URL}/api/suggestion/suggestionCount`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

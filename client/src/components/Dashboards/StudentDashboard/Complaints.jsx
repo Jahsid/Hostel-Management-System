@@ -3,6 +3,8 @@ import { Input } from "../../LandingSite/AuthPage/Input";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Complaints() {
 
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ function Complaints() {
       type: type,
     };
 
-    const res = await fetch("http://localhost:3000/api/complaint/register", {
+    const res = await fetch(`${API_URL}/api/complaint/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +104,7 @@ function Complaints() {
     const student = JSON.parse(localStorage.getItem("student"));
     const cmpln = { student: student._id };
     const fetchComplaints = async () => {
-      const res = await fetch("http://localhost:3000/api/complaint/student", {
+      const res = await fetch(`${API_URL}/api/complaint/student`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

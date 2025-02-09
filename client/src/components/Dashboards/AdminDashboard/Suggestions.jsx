@@ -4,10 +4,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Loader } from "../../Dashboards/Common/Loader";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Suggestions() {
   const getSuggestions = async () => {
     const hostel = JSON.parse(localStorage.getItem("hostel"));
-    const response = await fetch("http://localhost:3000/api/suggestion/hostel", {
+    const response = await fetch(`${API_URL}/api/suggestion/hostel`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +36,7 @@ function Suggestions() {
   const updateSuggestion = async (id) => {
     setLoader(true);
     console.log(id);
-    const response = await fetch("http://localhost:3000/api/suggestion/update", {
+    const response = await fetch(`${API_URL}/api/suggestion/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

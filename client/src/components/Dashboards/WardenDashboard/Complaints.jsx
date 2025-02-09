@@ -3,11 +3,13 @@ import { Line } from "react-chartjs-2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Complaints() {
   const getComplaints = async () => {
     const hostel = JSON.parse(localStorage.getItem("hostel"))._id;
     const response = await fetch(
-      `http://localhost:3000/api/complaint/hostel`,
+      `${API_URL}/api/complaint/hostel`,
       {
         method: "POST",
         headers: {
@@ -56,7 +58,7 @@ function Complaints() {
 
   const dismissComplaint = async (id) => {
     const response = await fetch(
-      "http://localhost:3000/api/complaint/resolve/",
+      `${API_URL}/api/complaint/resolve/`,
       {
         method: "POST",
         headers: {

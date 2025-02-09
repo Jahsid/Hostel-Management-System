@@ -1,5 +1,7 @@
 import { useState, useEffect} from "react";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Invoices() {
   const [invoiceList, setInvoiceList] = useState([]);
   const [totalInvoices, setTotalInvoices] = useState(0);
@@ -8,7 +10,7 @@ function Invoices() {
 
   useEffect(() => {
     let student = JSON.parse(localStorage.getItem("student"));
-    fetch("http://localhost:3000/api/invoice/student", {
+    fetch(`${API_URL}/api/invoice/student`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

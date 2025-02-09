@@ -25,5 +25,5 @@ app.use('/api/room', require('./routes/roomRoutes'));
 app.use('/api/hostel', require('./routes/hostelRoutes'));
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })

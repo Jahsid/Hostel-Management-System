@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function AdminRegisterStudent() {
   const registerStudent = async (e) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ function AdminRegisterStudent() {
         password: password,
       };
       const res = await fetch(
-        "http://localhost:3000/api/student/register-student",
+        `${API_URL}/api/student/register-student`,
         {
           method: "POST",
           headers: {
@@ -130,7 +132,7 @@ function AdminRegisterStudent() {
   useEffect(() => {
     const fetchAvailableRooms = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/room/getAvailableRoom"); // Adjust the endpoint
+        const response = await fetch(`${API_URL}/api/room/getAvailableRoom`); // Adjust the endpoint
         const data = await response.json();
           setAvailableRooms(data);
           setSelectedRoom(data[0].roomNumber)

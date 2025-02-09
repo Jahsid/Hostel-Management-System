@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const List = () => {
   const [invoiceList, setInvoiceList] = useState([
     {
@@ -18,7 +20,7 @@ const List = () => {
   ]);
   useEffect(() => {
     let student = JSON.parse(localStorage.getItem("student"));
-    fetch("http://localhost:3000/api/invoice/student", {
+    fetch(`${API_URL}/api/invoice/student`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +123,7 @@ function Home() {
 
   const getAttendance = async () => {
     let student = JSON.parse(localStorage.getItem("student"));
-    const res = await fetch("http://localhost:3000/api/attendance/get", {
+    const res = await fetch(`${API_URL}/api/attendance/get`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

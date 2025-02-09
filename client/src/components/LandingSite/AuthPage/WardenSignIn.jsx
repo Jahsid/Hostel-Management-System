@@ -5,13 +5,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from "../../Dashboards/Common/Loader";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function WardenSignIn() {
   let navigate = useNavigate();
   
   const getHostel = async () => {
     let warden = JSON.parse(localStorage.getItem("warden"));
     try {
-      const res = await fetch("http://localhost:3000/api/warden/get-hostel", {
+      const res = await fetch(`${API_URL}/api/warden/get-hostel`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -35,7 +37,7 @@ export default function WardenSignIn() {
       password: pass,
     };
 
-    let response = await fetch("http://localhost:3000/api/auth/login", {
+    let response = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +49,7 @@ export default function WardenSignIn() {
 
     if (result.success) {
       localStorage.setItem("token", result.data.token);
-      let warden = await fetch("http://localhost:3000/api/warden/get-warden", {
+      let warden = await fetch(`${API_URL}/api/warden/get-warden`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

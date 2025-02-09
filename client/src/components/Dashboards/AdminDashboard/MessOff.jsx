@@ -4,12 +4,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import  LoadingBar  from 'react-top-loading-bar'
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function MessOff() {
   const getRequests = async () => {
     setProgress(30);
     const hostel = JSON.parse(localStorage.getItem("hostel"));
     console.log(hostel);
-    const res = await fetch("http://localhost:3000/api/messoff/list", {
+    const res = await fetch(`${API_URL}/api/messoff/list`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +47,7 @@ function MessOff() {
   };
 
   const updateRequest = async (id, status) => {
-    const res = await fetch("http://localhost:3000/api/messoff/update", {
+    const res = await fetch(`${API_URL}/api/messoff/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

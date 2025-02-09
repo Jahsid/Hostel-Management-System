@@ -2,6 +2,8 @@ import { Input } from "./Input";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function RequestAcc() {
   const register = (event) => {
     event.preventDefault();
@@ -9,7 +11,7 @@ export default function RequestAcc() {
       admission_no: inputAdmission,
     };
 
-    fetch("http://localhost:3000/api/request/register", {
+    fetch(`${API_URL}/api/request/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -3,6 +3,8 @@ import { ShortCard } from "./Home/ShortCard";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const AdminRoomDetails = () => {
   const [rooms, setRooms] = useState([]);
   const [newRoom, setNewRoom] = useState({
@@ -18,7 +20,7 @@ const AdminRoomDetails = () => {
 
   const fetchAllRooms = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/room/getAll');
+      const response = await axios.get(`${API_URL}/api/room/getAll`);
       setRooms(response.data);
     } catch (error) {
       console.error('Error fetching rooms:', error);
@@ -41,7 +43,7 @@ const AdminRoomDetails = () => {
 
   const handleCreateRoom = async () => {
     try {
-      await axios.post('http://localhost:3000/api/room/create', newRoom);
+      await axios.post(`${API_URL}/api/room/create`, newRoom);
       fetchAllRooms(); // Refresh the list after creating a new room
       setNewRoom({
         roomNumber: '',
@@ -55,7 +57,7 @@ const AdminRoomDetails = () => {
 
   const handleDeleteRoom = async (roomId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/room/delete/${roomId}`);
+      await axios.delete(`${API_URL}/api/room/delete/${roomId}`);
       fetchAllRooms(); // Refresh the list after deleting a room
     } catch (error) {
       console.error('Error deleting room:', error);
