@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 const List = () => {
   const [invoiceList, setInvoiceList] = useState([
